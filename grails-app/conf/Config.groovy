@@ -23,16 +23,16 @@ log4j = {
 
 
 mailgun{
-       apiKey = 'any-key'
-       domain = 'any-domian'
+       apiKey = 'key-731feb2a2d7bcc7ad7b9a94b78734439'
+       domain = 'sandbox8321393f775d459ba8d8449a976f8198.mailgun.org'
 
        message{
-              defaultFrom = 'any-from'
-              defaultTo = 'some-to'
-              defaultSubject = 'any-subjet'
+              defaultFrom = 'BigHamlet Test <postmaster@sandbox8321393f775d459ba8d8449a976f8198.mailgun.org>'
+              defaultTo = 'devbamboo@gmail.com, marianoekfuri@gmail.com'
+              defaultSubject = 'BigHamlet tiene promociones para vos'
               format = 'html'
-              defaulTemplate = 'any-template'
-              defaultReplyTo = 'any-reply-to'
+              defaulTemplate = 'mailgunTest'
+              defaultReplyTo = 'devbamboo@gmail.com'
        }
 
        tracking{
