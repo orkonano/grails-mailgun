@@ -20,3 +20,28 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+mailgun{
+       apiKey = 'any-key'
+       domain = 'any-domian'
+
+       message{
+              defaultFrom = 'any-from'
+              defaultTo = 'some-to'
+              defaultSubject = 'any-subjet'
+              format = 'html'
+              defaulTemplate = 'any-template'
+              defaultReplyTo = 'any-reply-to'
+       }
+
+       tracking{
+              enabled = 'yes'
+              clicks{
+                     enabled = 'yes'
+              }
+              opens{
+                     enabled = 'yes'
+              }
+       }
+}
