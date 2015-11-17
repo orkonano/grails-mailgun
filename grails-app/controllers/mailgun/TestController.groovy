@@ -11,4 +11,10 @@ class TestController {
 
         render resp.json.items
     }
+
+    def send() {
+        RestResponse resp = mailgunService.sendMessage()
+
+        render resp.status
+    }
 }

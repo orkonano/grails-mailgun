@@ -31,7 +31,7 @@ mailgun{
               defaultTo = 'devbamboo@gmail.com, marianoekfuri@gmail.com'
               defaultSubject = 'BigHamlet tiene promociones para vos'
               format = 'html'
-              defaulTemplate = 'mailgunTest'
+              defaulTemplate = '/test/mailgunTest'
               defaultReplyTo = 'devbamboo@gmail.com'
        }
 
