@@ -5,7 +5,9 @@ class MailgunGrailsPlugin {
     def grailsVersion = "2.5 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
-        "grails-app/views/error.gsp"
+        "grails-app/views/error.gsp",
+        "grails-app/views/test/mailgunTest.gsp",
+        "grails-app/controllers/mailgun/TestController.groovy"
     ]
 
     // TODO Fill in these fields

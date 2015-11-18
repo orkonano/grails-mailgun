@@ -35,14 +35,20 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
+        compile 'org.jsoup:jsoup:1.8.1'
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.27'
     }
 
     plugins {
-        build(":release:3.1.1",
-              ":rest-client-builder:2.1.1") {
+
+        compile ":rest-client-builder:2.1.1"
+
+        build(":release:3.1.1") {
             export = false
         }
+
+        // plugins for the build system only
+        build ":tomcat:7.0.55.2"
     }
 }

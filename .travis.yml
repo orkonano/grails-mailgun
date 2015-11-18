@@ -1,0 +1,7 @@
+sudo: false
+language: groovy
+
+before_script:
+- chmod +x grailsw
+- chmod +x travis-build.sh
+script: ./travis-build.sh
