@@ -67,13 +67,19 @@ class MailgunService {
 
             if (campaignsID){
                 campaignsID.each { campaignID ->
-                    setProperty 'o:campaign', campaignID.trim()
+                    String campaignIDTrimed = campaignID.trim()
+                    if (campaignIDTrimed){
+                        setProperty 'o:campaign', campaignIDTrimed
+                    }
                 }
             }
 
             if (tags){
                 tags.each { tag ->
-                    setProperty 'o:tag', tag.trim()
+                    String tagTrimed = tag.trim()
+                    if (tagTrimed){
+                        setProperty 'o:tag', tagTrimed
+                    }
                 }
             }
         }
