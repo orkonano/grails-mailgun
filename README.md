@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=develop)](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=develop)
 
 # grails-mailgun
-Grails plugin to use Mailgun Api
+Grails plugin to use Mailgun Api.
+
+**¡IMPORTANT!**
+You need to create your own mailgun account. The plugins doens't work without a valid api-key and a valid domain
 
 ## Config parameters
 
