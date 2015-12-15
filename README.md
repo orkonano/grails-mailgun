@@ -5,11 +5,11 @@
 Grails plugin to use Mailgun Api.
 
 **¡IMPORTANT!**
-You need to create your own mailgun account. The plugins doens't work without a valid api-key and a valid domain
+You need to create your own mailgun account. The plugin doesn't work without a valid api-key and a valid domain
 
 ## Config parameters
 
-You need to set into your Config.groovy the followings properties
+You need to set into your Config.groovy the following properties:
 
 ```groovy
 mailgun{
@@ -57,9 +57,9 @@ mailgun{
 
 ## Mailgun Features
 
-The plugin allows to work with some mailgun's features:
-- List all maillist created in mailgun: Mailgun endpoint --> GET: https://api.mailgun.net/v3/lists
-- Send message across Mailgun Api: Mailgun endpoint --> POST: https://api.mailgun.net/v3/$domain/messages
+The plugin allows to work with some features of mailgun:
+- Lists all mail list created in mailgun: Mailgun endpoint --> GET: https://api.mailgun.net/v3/lists
+- Sends message across Mailgun Api: Mailgun endpoint --> POST: https://api.mailgun.net/v3/$domain/messages
 
 
 ## Examples
@@ -106,6 +106,6 @@ The plugin allows to work with some mailgun's features:
 
 **MailgunService** implements all features.
 
-The method *allLists*, lists all maillist created in mailgun.
+The method *allLists*, lists all mail lists created in mailgun.
 
-The method *sendMessage*, send a new message across mailgun api.
+The method *sendMessage*, sends a new message across mailgun api.
