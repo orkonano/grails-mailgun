@@ -3,7 +3,7 @@ package grails.plugin.mailgun
 import grails.plugin.mailgun.render.EmailHtmlRender
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
-import org.codehaus.groovy.grails.web.json.JSONObject
+import org.grails.web.json.JSONObject
 import org.jsoup.Jsoup
 
 class MailgunService {
