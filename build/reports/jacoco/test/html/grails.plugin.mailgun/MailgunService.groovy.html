@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MailgunService.groovy</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">grails-mailgun</a> &gt; <a href="index.source.html" class="el_package">grails.plugin.mailgun</a> &gt; <span class="el_source">MailgunService.groovy</span></div><h1>MailgunService.groovy</h1><pre class="source lang-java linenums">package grails.plugin.mailgun
+
+import grails.plugin.mailgun.render.EmailHtmlRender
+import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import org.grails.web.json.JSONObject
+import org.jsoup.Jsoup
+
+class MailgunService {
+
+    RestBuilder restBuilder
+    def grailsApplication
+    EmailHtmlRender emailHtmlRender
+
+    RestResponse getAllLists(){
+<span class="fc" id="L16">        log.info(&quot;Buscando todas las listas de mail de mailgun&quot;)</span>
+<span class="fc" id="L17">        RestResponse resp = restBuilder.get(&quot;https://api.mailgun.net/v3/lists&quot;){</span>
+<span class="nc" id="L18">            auth 'api', grailsApplication.config.mailgun.apiKey</span>
+<span class="nc" id="L19">            accept JSONObject</span>
+        }
+<span class="fc" id="L21">        log.info(&quot;Se termino de buscar las listas de mailgun, con status $resp.statusCode&quot;)</span>
+<span class="pc" id="L22">        resp</span>
+    }
+
+    RestResponse sendMessage(Map params = [:]){
+<span class="fc" id="L26">        log.info(&quot;Enviando mensaje mediante mailgun&quot;)</span>
+
+<span class="fc" id="L28">        String from = getMailgunProperty(MailgunParameters.FROM.name(), params, grailsApplication.config.mailgun.message.defaultFrom)</span>
+<span class="fc" id="L29">        String[] recipients = getMailgunProperty(MailgunParameters.TO.name(), params, grailsApplication.config.mailgun.message.defaultTo).split(',')</span>
+<span class="fc" id="L30">        String subject = getMailgunProperty(MailgunParameters.SUBJECT.name(), params, grailsApplication.config.mailgun.message.defaultSubject)</span>
+
+<span class="fc" id="L32">        String format = getMailgunProperty(MailgunParameters.FORMAT.name(), params, grailsApplication.config.mailgun.message.format)</span>
+
+<span class="fc" id="L34">        String bodyHtml = &quot;&quot;</span>
+<span class="fc" id="L35">        String bodyText = &quot;&quot;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (format == 'html'){</span>
+<span class="fc" id="L37">            def bodyParams = getMailgunProperty(MailgunParameters.BODY.name(), params, [:])</span>
+<span class="fc" id="L38">            String template = getMailgunProperty(MailgunParameters.TEMPLATE.name(), params, grailsApplication.config.mailgun.message.defaulTemplate)</span>
+<span class="fc" id="L39">            bodyHtml = emailHtmlRender.render([view: template, model: bodyParams])</span>
+<span class="fc" id="L40">            bodyText = Jsoup.parse(bodyHtml).text()</span>
+
+        }else{
+<span class="fc" id="L43">            bodyText = getMailgunProperty(MailgunParameters.BODY.name(), params, &quot;&quot;)</span>
+        }
+
+<span class="fc" id="L46">        String[] tags = getMailgunProperty(MailgunParameters.TAG.name(), params, &quot;&quot;).split(&quot;,&quot;)</span>
+<span class="fc" id="L47">        String[] campaignsID = getMailgunProperty(MailgunParameters.CAMPAIGN_ID.name(), params, &quot;&quot;).split(&quot;,&quot;)</span>
+
+<span class="fc" id="L49">        RestResponse resp = restBuilder.post(&quot;https://api.mailgun.net/v3/$grailsApplication.config.mailgun.domain/messages&quot;){</span>
+<span class="fc" id="L50">            auth 'api', grailsApplication.config.mailgun.apiKey</span>
+<span class="fc" id="L51">            accept JSONObject</span>
+<span class="fc" id="L52">            setProperty 'from', from</span>
+<span class="fc" id="L53">            recipients.each { to -&gt;</span>
+<span class="pc" id="L54">                setProperty 'to', to.trim()</span>
+            }
+<span class="fc" id="L56">            setProperty 'subject', subject</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (bodyHtml){</span>
+<span class="fc" id="L59">                setProperty 'html', bodyHtml</span>
+            }
+<span class="fc" id="L61">            setProperty 'text', bodyText</span>
+
+<span class="fc" id="L63">            setProperty 'o:tracking', grailsApplication.config.mailgun.tracking.enabled</span>
+<span class="fc" id="L64">            setProperty 'o:tracking-clicks', grailsApplication.config.mailgun.tracking.clicks.enabled</span>
+<span class="fc" id="L65">            setProperty 'o:tracking-opens', grailsApplication.config.mailgun.tracking.opens.enabled</span>
+<span class="fc" id="L66">            setProperty 'h:Reply-To', grailsApplication.config.mailgun.message.defaultReplyTo</span>
+
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            if (campaignsID){</span>
+<span class="fc" id="L69">                campaignsID.each { campaignID -&gt;</span>
+<span class="fc" id="L70">                    String campaignIDTrimed = campaignID.trim()</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">                    if (campaignIDTrimed){</span>
+<span class="pc" id="L72">                        setProperty 'o:campaign', campaignIDTrimed</span>
+                    }
+                }
+            }
+
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">            if (tags){</span>
+<span class="pc" id="L78">                tags.each { tag -&gt;</span>
+<span class="fc" id="L79">                    String tagTrimed = tag.trim()</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                    if (tagTrimed){</span>
+<span class="pc" id="L81">                        setProperty 'o:tag', tagTrimed</span>
+                    }
+                }
+            }
+        }
+
+<span class="fc" id="L87">        log.info(&quot;Se termino de enviar el mail, con status $resp.statusCode&quot;)</span>
+<span class="pc" id="L88">        resp</span>
+    }
+
+    private getMailgunProperty(String property, Map params, defaultValue = &quot;&quot;){
+<span class="pc bfc" id="L92" title="All 2 branches covered.">        params[property] ?: defaultValue</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
