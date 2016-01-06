@@ -31,9 +31,12 @@
 
 # "temporary" build files
 /target
+build/
 
 #IDE
 *.iml
 .idea/
 .classpath
 .project
+.gradle/
+
