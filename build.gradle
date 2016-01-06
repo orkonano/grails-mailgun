@@ -16,7 +16,7 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version "2.0.0-SNAPSHOT"
+version "2.0.0"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -90,27 +90,16 @@ jacocoTestReport {
 jacocoTestReport.dependsOn test
 
 //Publish
-def bambooRepositoryUsername = System.getenv('BAMBOO_REPOSITORY_USERNAME') ?: project.hasProperty('bambooRepositoryUsername') ? project.bambooRepositoryUsername : ''
-def bambooRepositoryPassword = System.getenv("BAMBOO_REPOSITORY_PASSWORD") ?: project.hasProperty('bambooRepositoryPassword') ? project.bambooRepositoryPassword : ''
-
-publishing {
-    repositories {
-        maven {
-            name "bambooRelease"
-            credentials {
-                username bambooRepositoryUsername
-                password bambooRepositoryPassword
-            }
-            url "http://nexus-bambooarg.rhcloud.com/nexus/content/repositories/releases/"
-        }
-
-        maven {
-            name "bambooSNAPSHOT"
-            credentials {
-                username bambooRepositoryUsername
-                password bambooRepositoryPassword
-            }
-            url "http://nexus-bambooarg.rhcloud.com/nexus/content/repositories/snapshots/"
+bintray {
+    pkg {
+        userOrg = 'orkonano' // If you want to publish to an organization
+        name = "$project.name"
+        repo = 'grails-plugin'
+        issueTrackerUrl = "https://github.com/orkonano/grails-mailgun/issues"
+        vcsUrl = "https://github.com/orkonano/grails-mailgun"
+        version {
+            attributes = ['grails-plugin': "$project.group:$project.name"]
+            name = project.version
         }
     }
 }
