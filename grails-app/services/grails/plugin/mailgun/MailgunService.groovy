@@ -5,6 +5,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import org.grails.web.json.JSONObject
 import org.jsoup.Jsoup
+import org.springframework.http.MediaType
 
 class MailgunService {
 
@@ -49,6 +50,7 @@ class MailgunService {
         RestResponse resp = restBuilder.post("https://api.mailgun.net/v3/$grailsApplication.config.mailgun.domain/messages"){
             auth 'api', grailsApplication.config.mailgun.apiKey
             accept JSONObject
+            contentType MediaType.MULTIPART_FORM_DATA_VALUE
             setProperty 'from', from
             recipients.each { to ->
                 setProperty 'to', to.trim()

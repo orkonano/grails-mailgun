@@ -1,5 +1,6 @@
 package grails.plugin.mailgun
 
+import grails.converters.JSON
 import grails.plugin.mailgun.render.EmailHtmlRender
 import grails.plugins.rest.client.RequestCustomizer
 import grails.plugins.rest.client.RestBuilder
@@ -16,6 +17,7 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
  */
 @TestFor(MailgunService)
+
 class MailgunServiceSpec extends Specification {
 
     String keyAuthorization
