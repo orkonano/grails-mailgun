@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=develop)](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=master)
 [![Project Status](https://stillmaintained.com/orkonano/grails-mailgun.png)](https://stillmaintained.com/orkonano/grails-mailgun)
-[![Throughput Graph](https://graphs.waffle.io/orkonano/grails-mailgun/throughput.svg)](https://waffle.io/orkonano/grails-mailgun/metrics)
+[![Stories in Ready](https://badge.waffle.io/orkonano/grails-mailgun.svg?label=ready&title=Ready)](http://waffle.io/orkonano/grails-mailgun)
 
 # grails-mailgun
 Grails plugin to use Mailgun Api.
