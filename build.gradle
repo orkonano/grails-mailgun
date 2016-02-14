@@ -102,9 +102,6 @@ bintray {
 }
 
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
     githubSlug = 'orkonano/grails-mailgun'
     license {
         name = 'Apache-2.0'
