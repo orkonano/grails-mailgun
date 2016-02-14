@@ -15,7 +15,7 @@ plugins {
     id "io.spring.dependency-management" version "0.5.4.RELEASE"
 }
 
-version "2.0.1"
+version "2.0.2"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -102,9 +102,6 @@ bintray {
 }
 
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
     githubSlug = 'orkonano/grails-mailgun'
     license {
         name = 'Apache-2.0'

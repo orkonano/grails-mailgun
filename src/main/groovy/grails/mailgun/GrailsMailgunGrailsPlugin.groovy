@@ -1,6 +1,8 @@
 package grails.mailgun
 
+import grails.plugin.mailgun.render.DefaultEmailHtmlRender
 import grails.plugins.*
+import grails.plugins.rest.client.RestBuilder
 
 class GrailsMailgunGrailsPlugin extends Plugin {
 
@@ -47,9 +49,14 @@ Brief summary/description of the plugin.
         // TODO Implement additions to web.xml (optional), this event occurs before
     }
 
-    def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
-    }
+    Closure doWithSpring() {{->
+        restBuilder(RestBuilder, [:])
+
+        emailHtmlRender(DefaultEmailHtmlRender){
+            groovyPageRenderer = ref('groovyPageRenderer')
+        }
+
+    }}
 
     def doWithDynamicMethods = { ctx ->
         // TODO Implement registering dynamic methods to classes (optional)
