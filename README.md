@@ -62,6 +62,19 @@ The plugin allows to work with some features of mailgun:
 - Lists all mail list created in mailgun: Mailgun endpoint --> GET: https://api.mailgun.net/v3/lists
 - Sends message across Mailgun Api: Mailgun endpoint --> POST: https://api.mailgun.net/v3/$domain/messages
 
+## Email Html Render
+
+The plugin define a default email html render. **DefaultEmailHtmlRender.groovy**
+It render a view (gsp) passing a model as params
+
+```groovy
+
+    String render(Map params){
+        groovyPageRenderer.render view: params.view, model: params.model
+    }
+    
+```
+
 
 ## Examples
 
