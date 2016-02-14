@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=develop)](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=master)
 [![Project Status](https://stillmaintained.com/orkonano/grails-mailgun.png)](https://stillmaintained.com/orkonano/grails-mailgun)
+[![Stories in Ready](https://badge.waffle.io/orkonano/grails-mailgun.svg?label=ready&title=Ready)](http://waffle.io/orkonano/grails-mailgun)
 
 # grails-mailgun
 Grails plugin to use Mailgun Api.
@@ -60,6 +61,19 @@ mailgun{
 The plugin allows to work with some features of mailgun:
 - Lists all mail list created in mailgun: Mailgun endpoint --> GET: https://api.mailgun.net/v3/lists
 - Sends message across Mailgun Api: Mailgun endpoint --> POST: https://api.mailgun.net/v3/$domain/messages
+
+## Email Html Render
+
+The plugin define a default email html render. **DefaultEmailHtmlRender.groovy**
+It render a view (gsp) passing a model as params
+
+```groovy
+
+    String render(Map params){
+        groovyPageRenderer.render view: params.view, model: params.model
+    }
+    
+```
 
 
 ## Examples

@@ -7,7 +7,7 @@ import org.grails.web.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.http.MediaType
 
-class MailgunService {
+class MailgunService{
 
     RestBuilder restBuilder
     def grailsApplication
