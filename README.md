@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/orkonano/grails-mailgun.png?label=ready&title=Ready)](https://waffle.io/orkonano/grails-mailgun)
 [![Build Status](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=develop)](https://travis-ci.org/orkonano/grails-mailgun.svg?branch=master)
 [![Project Status](https://stillmaintained.com/orkonano/grails-mailgun.png)](https://stillmaintained.com/orkonano/grails-mailgun)
 
