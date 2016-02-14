@@ -5,9 +5,10 @@ import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import org.grails.web.json.JSONObject
 import org.jsoup.Jsoup
+import org.springframework.beans.factory.InitializingBean
 import org.springframework.http.MediaType
 
-class MailgunService {
+class MailgunService implements InitializingBean{
 
     RestBuilder restBuilder
     def grailsApplication
@@ -92,5 +93,11 @@ class MailgunService {
 
     private getMailgunProperty(String property, Map params, defaultValue = ""){
         params[property] ?: defaultValue
+    }
+
+    @Override
+    void afterPropertiesSet() throws Exception {
+        assert restBuilder != null, "RestBuilder bean is not register"
+        assert emailHtmlRender != null, "EmailHtmlRender bean is not register"
     }
 }
