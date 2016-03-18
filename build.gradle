@@ -15,7 +15,13 @@ plugins {
     id "io.spring.dependency-management" version "0.5.4.RELEASE"
 }
 
-version "2.0.2"
+ext {
+    mailgunPluginVersion = '2.0.3'
+    grailsVersion = project.grailsVersion
+    gradleWrapperVersion = project.gradleWrapperVersion
+}
+
+version mailgunPluginVersion
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -27,10 +33,6 @@ apply plugin: "org.grails.grails-gsp"
 apply plugin: "org.grails.grails-plugin-publish"
 apply plugin: "jacoco"
 
-ext {
-    grailsVersion = project.grailsVersion
-    gradleWrapperVersion = project.gradleWrapperVersion
-}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7

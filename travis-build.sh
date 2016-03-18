@@ -1,4 +1,7 @@
 #!/bin/bash
 
-./gradlew clean
-./gradlew test
+if [[ -z $TRAVIS_TAG ]]; then
+    ./gradlew test
+fi
+
+exit $?
