@@ -1,12 +1,12 @@
 #!/bin/bash
 
-vesion="$(grep 'mailgunPluginVersion =' build.gradle)"
-vesion="${vesion#*=}"
-vesion="${vesion//[[:blank:]\'\"]/}"
+version="$(grep 'mailgunPluginVersion =' build.gradle)"
+version="${version#*=}"
+version="${version//[[:blank:]\'\"]/}"
 
 tagVersion="v$version"
 
-echo "Publishing $vesion version"
+echo "Publishing $version version"
 
 EXIT_STATUS=0
 
