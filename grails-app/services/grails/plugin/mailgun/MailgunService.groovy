@@ -12,10 +12,14 @@ class MailgunService{
     RestBuilder restBuilder
     def grailsApplication
     EmailHtmlRender emailHtmlRender
+    
+    private String getUrl(){
+        grailsApplication.config.mailgun.url ?: "https://api.mailgun.net/v3"   
+    }
 
     RestResponse getAllLists(){
         log.info("Buscando todas las listas de mail de mailgun")
-        RestResponse resp = restBuilder.get("https://api.mailgun.net/v3/lists"){
+        RestResponse resp = restBuilder.get("${getUrl()}/lists"){
             auth 'api', grailsApplication.config.mailgun.apiKey
             accept JSONObject
         }
@@ -47,7 +51,7 @@ class MailgunService{
         String[] tags = getMailgunProperty(MailgunParameters.TAG.name(), params, "").split(",")
         String[] campaignsID = getMailgunProperty(MailgunParameters.CAMPAIGN_ID.name(), params, "").split(",")
 
-        RestResponse resp = restBuilder.post("https://api.mailgun.net/v3/$grailsApplication.config.mailgun.domain/messages"){
+        RestResponse resp = restBuilder.post("${getUrl()}/$grailsApplication.config.mailgun.domain/messages"){
             auth 'api', grailsApplication.config.mailgun.apiKey
             accept JSONObject
             contentType MediaType.MULTIPART_FORM_DATA_VALUE
