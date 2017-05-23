@@ -16,7 +16,7 @@ plugins {
 }
 
 ext {
-    mailgunPluginVersion = '2.0.3'
+    mailgunPluginVersion = '2.0.3-b'
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
 }
